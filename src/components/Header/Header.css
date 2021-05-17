@@ -29,15 +29,6 @@
   height: 38px;
 }
 
-.header__navigation {
-  display: flex;
-  width: 100%;
-}
-
-.header__hamburger-button {
-  display: none;
-}
-
 .header__auth-list {
   display: flex;
   flex-direction: row;
@@ -91,6 +82,15 @@
   cursor: pointer;
 }
 
+.header__navigation {
+  display: flex;
+  width: 100%;
+}
+
+.header__hamburger-button {
+  display: none;
+}
+
 .header__sign-in-button:hover {
   opacity: 0.8;
 }
@@ -131,6 +131,10 @@
     margin: 0 auto;
   }
 
+  .header__auth-element:first-of-type {
+    margin-right: 14px;
+  }
+
   .header__sing-up-link {
     font-size: 10px;
   }
@@ -139,10 +143,6 @@
     font-size: 10px;
     width: 54px;
     height: 26px;
-  }
-
-  .header__auth-element:first-of-type {
-    margin-right: 14px;
   }
 
   .header__hamburger-button {

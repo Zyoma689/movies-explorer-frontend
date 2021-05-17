@@ -33,9 +33,12 @@ export default function Navigation() {
           </ul>
         </li>
         <li className="navigation__element">
-          <Link className="navigation__profile-button" to="/profile">
+          <NavLink
+            className="navigation__profile-button"
+            activeClassName="navigation__profile-button_active"
+            to="/profile">
             <img className="navigation__profile-icon" src={icon} alt="Аккаунт"/>Аккаунт
-          </Link>
+          </NavLink>
           {/*<ProfileButton/>*/}
           {/*<Link to="/profile">*/}
           {/*  <img src={icon} alt="Аккаунт"/>Аккаунт*/}
