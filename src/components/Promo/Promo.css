@@ -1,0 +1,125 @@
+/** {*/
+/* outline: 1px solid red;*/
+/*}*/
+
+.promo {
+  background-color: #073042;
+}
+
+.promo__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /*align-items: center;*/
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 75px 0 75px;
+}
+
+.promo__text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.promo__title {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  color: #ffffff;
+  max-width: 640px;
+  margin: 0 0 36px;
+}
+
+.promo__subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #ffffff;
+  opacity: 0.5;
+  max-width: 310px;
+  margin: 0 0 146px;
+}
+
+.promo__button {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(256, 256, 256, 0.6);
+  /*padding: 10px 20px;*/
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 129px;
+  height: 36px;
+}
+
+.promo__main-illustration {
+  display: block;
+  width: 310px;
+  height: 304px;
+}
+
+@media screen and (max-width: 1200px) {
+  .promo__container {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .promo__container {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 140px 0 76px;
+  }
+
+  .promo__text-container {
+    align-items: center;
+    margin-top: 48px;
+  }
+
+  .promo__title {
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  .promo__subtitle {
+    text-align: center;
+    margin-bottom: 92px;
+    max-width: 260px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .promo__container {
+    margin: 0 10px;
+    padding: 70px 0 30px;
+    letter-spacing: -0.04em;
+  }
+
+  .promo__text-container {
+    margin-top: 44px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 24px;
+  }
+
+  .promo__subtitle {
+    margin-bottom: 80px;
+  }
+
+  .promo__main-illustration {
+    width: 210px;
+    height: 206px;
+  }
+}

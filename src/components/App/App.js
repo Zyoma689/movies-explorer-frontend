@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { Route, Switch } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
+import Main from "../Main/Main";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -44,6 +45,7 @@ function App() {
           <div className="page__header-container">
             <Header/>
           </div>
+          <Main/>
           <Footer/>
         </Route>
         <Route path={["/movies", "/saved-movies", "/profile"]}>
