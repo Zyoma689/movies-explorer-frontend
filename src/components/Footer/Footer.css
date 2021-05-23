@@ -3,9 +3,8 @@
   flex-direction: column;
   align-items: center;
   max-width: 1140px;
-  /*padding: 79px auto 20px;*/
   padding-top: 79px;
-  padding-bottom: 20px;
+  padding-bottom: 19px;
   margin: 0 auto;
 }
 
@@ -27,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 19px;
 }
 
 .footer__copyright {
@@ -91,8 +90,7 @@
   .footer__container {
     flex-direction: column-reverse;
     justify-content: center;
-    margin-top: 30px;
-    /*align-items: center;*/
+    margin-top: 29px;
   }
 
   .footer__copyright {

@@ -102,7 +102,7 @@
 @media screen and (max-width: 810px) {
   .about-project__container {
     margin: 0 50px;
-    padding: 90px 0;
+    padding: 90px 0 90px;
   }
 
   .about-project__article-list {
@@ -135,7 +135,7 @@
   .about-project__container {
     max-width: 352px;
     margin: 0 auto;
-    padding: 70px 0;
+    padding: 70px 0 70px;
   }
 
   .about-project__title {
