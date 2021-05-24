@@ -12,25 +12,29 @@ export default function Register() {
         </Link>
         <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form" action="">
-          <label className="register__label">
-            <span className="register__input-title">Имя</span>
-            <input className="register__input" type="text" required/>
-            <span className="register__input-error">Что-то пошло не так...</span>
-          </label>
-          <label className="register__label">
-            <span className="register__input-title">E-mail</span>
-            <input className="register__input" type="email" required/>
-            <span className="register__input-error">Что-то пошло не так...</span>
-          </label>
-          <label className="register__label">
-            <span className="register__input-title">Пароль</span>
-            <input className="register__input register__input_type_error" type="password" required/>
-            <span className="register__input-error register__input-error_visible register__input-error_last-of-type">Что-то пошло не так...</span>
-          </label>
-          <button className="register__button">Зарегистрироваться</button>
-          <p className="register__question">Уже зарегистрированы?
-            <Link className="register__link" to="/signin">Войти</Link>
-          </p>
+          <div className="register__input-container">
+            <label className="register__label">
+              <span className="register__input-title">Имя</span>
+              <input className="register__input" type="text" required/>
+              <span className="register__input-error">Что-то пошло не так...</span>
+            </label>
+            <label className="register__label">
+              <span className="register__input-title">E-mail</span>
+              <input className="register__input" type="email" required/>
+              <span className="register__input-error">Что-то пошло не так...</span>
+            </label>
+            <label className="register__label">
+              <span className="register__input-title">Пароль</span>
+              <input className="register__input register__input_type_error" type="password" required/>
+              <span className="register__input-error register__input-error_visible register__input-error_last-of-type">Что-то пошло не так...</span>
+            </label>
+          </div>
+          <div className="register__button-container">
+            <button className="register__button">Зарегистрироваться</button>
+            <p className="register__question">Уже зарегистрированы?
+              <Link className="register__link" to="/signin">Войти</Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
