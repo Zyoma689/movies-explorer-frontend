@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
+import Register from "../Register/Register";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -57,6 +58,9 @@ function App() {
             onClose={closeMenu}
           />
           <Footer/>
+        </Route>
+        <Route path="/signup">
+          <Register/>
         </Route>
       </Switch>
 
