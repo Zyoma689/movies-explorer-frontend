@@ -26,7 +26,7 @@ export default function Register() {
             <label className="register__label">
               <span className="register__input-title">Пароль</span>
               <input className="register__input register__input_type_error" type="password" required/>
-              <span className="register__input-error register__input-error_visible register__input-error_last-of-type">Что-то пошло не так...</span>
+              <span className="register__input-error register__input-error_visible">Что-то пошло не так...</span>
             </label>
           </div>
           <div className="register__button-container">

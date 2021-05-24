@@ -118,10 +118,6 @@
   opacity: 1;
 }
 
-.register__input-error_last-of-type {
-  margin-bottom: 0;
-}
-
 .register__button {
   display: flex;
   justify-content: center;

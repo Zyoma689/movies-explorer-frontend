@@ -6,6 +6,7 @@ import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -61,6 +62,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <Register/>
+        </Route>
+        <Route path="/signin">
+          <Login/>
         </Route>
       </Switch>
 
