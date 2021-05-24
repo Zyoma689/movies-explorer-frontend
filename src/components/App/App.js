@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -65,6 +66,9 @@ function App() {
         </Route>
         <Route path="/signin">
           <Login/>
+        </Route>
+        <Route path="*">
+          <PageNotFound/>
         </Route>
       </Switch>
 
