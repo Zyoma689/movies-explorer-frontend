@@ -8,6 +8,8 @@ import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -51,7 +53,21 @@ function App() {
           <Main/>
           <Footer/>
         </Route>
-        <Route path={["/movies", "/saved-movies", "/profile"]}>
+        <Route path="/movies">
+          <Movies
+            onOpenMenu={handleMenuButtonClick}
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+        </Route>
+        <Route path="/saved-movies">
+          <SavedMovies
+            onOpenMenu={handleMenuButtonClick}
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+        </Route>
+        <Route path={"/profile"}>
           <Header
             onOpenMenu={handleMenuButtonClick}
           />
