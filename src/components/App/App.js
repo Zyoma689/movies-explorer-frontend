@@ -10,6 +10,7 @@ import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -67,15 +68,12 @@ function App() {
             onClose={closeMenu}
           />
         </Route>
-        <Route path={"/profile"}>
-          <Header
+        <Route path="/profile">
+          <Profile
             onOpenMenu={handleMenuButtonClick}
-          />
-          <Menu
             isOpen={isMenuOpen}
             onClose={closeMenu}
           />
-          <Footer/>
         </Route>
         <Route path="/signup">
           <Register/>

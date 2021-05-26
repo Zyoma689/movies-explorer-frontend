@@ -1,0 +1,39 @@
+import React from 'react';
+import { Link } from "react-router-dom";
+import './Profile.css';
+import Header from "../Header/Header";
+import Menu from "../Menu/Menu";
+
+export default function Profile(props) {
+  return (
+    <>
+      <Header
+        onOpenMenu={props.onOpenMenu}
+      />
+      <section className="profile">
+        <form className="profile__form">
+          <p className="profile__greeting">Привет, Виталий!</p>
+          <div className="profile__inputs">
+            <label className="profile__label">
+              <input className="profile__input" type="text" value="Виталий"/>
+              <span className="profile__input-title">Имя</span>
+            </label>
+            <label className="profile__label">
+              <input className="profile__input profile__input_type_error" type="text" value="pochta@yandexru"/>
+              <span className="profile__input-title">E-mail</span>
+            </label>
+          </div>
+          <p className="profile__message">Что то пошло не так!</p>
+          <div className="profile__container">
+            <button className="profile__button">Редактировать</button>
+            <Link className="profile__link" to="/">Выйти из аккаунта</Link>
+          </div>
+        </form>
+      </section>
+      <Menu
+        isOpen={props.isOpen}
+        onClose={props.onClose}
+      />
+    </>
+  )
+}
