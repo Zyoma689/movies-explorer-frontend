@@ -6,6 +6,7 @@
   padding-top: 79px;
   padding-bottom: 19px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .footer__text {
@@ -72,6 +73,7 @@
 @media screen and (max-width: 1200px) {
   .footer {
     margin: 0 30px;
+    width: auto;
   }
 }
 

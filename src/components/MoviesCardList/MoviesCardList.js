@@ -7,11 +7,17 @@ export default function MoviesCardList(props) {
     <section className="cards">
       <ul className="cards__list">
         <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
       </ul>
     </section>
   )
