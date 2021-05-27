@@ -6,6 +6,7 @@
   max-width: 1140px;
   height: 74px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .header__logo-link {
@@ -98,6 +99,7 @@
 @media screen and (max-width: 1200px) {
   .header {
     margin: 0 30px;
+    width: auto;
   }
 }
 
@@ -127,7 +129,7 @@
 
 @media screen and (max-width: 420px) {
   .header {
-    max-width: 360px;
+    width: 360px;
     margin: 0 auto;
   }
 
@@ -154,6 +156,7 @@
 
 @media screen and (max-width: 388px) {
   .header {
+    width: auto;
     margin: 0 14px;
   }
 }

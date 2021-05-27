@@ -9,17 +9,15 @@ import SearchForm from "../SearchForm/SearchForm";
 export default function SavedMovies(props) {
   return (
     <div className="saved-movies">
-      <div>
-        <Header
-          onOpenMenu={props.onOpenMenu}
-        />
-        <SearchForm/>
-        <MoviesCardList isSavedMoviesList={true}/>
-        <Menu
-          isOpen={props.isOpen}
-          onClose={props.onClose}
-        />
-      </div>
+      <Header
+        onOpenMenu={props.onOpenMenu}
+      />
+      <SearchForm/>
+      <MoviesCardList isSavedMoviesList={true}/>
+      <Menu
+        isOpen={props.isOpen}
+        onClose={props.onClose}
+      />
       <Footer/>
     </div>
   )

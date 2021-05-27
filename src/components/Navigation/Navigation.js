@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import './Navigation.css';
 import icon from "../../images/profile_icon.svg";
 
-export default function Navigation() {
+export default function Navigation(props) {
   return (
     <nav className="navigation">
       <ul className="navigation__list">
@@ -13,6 +13,7 @@ export default function Navigation() {
             <li className="movies-navigation__element movies-navigation__element_place_menu">
               <Link
                 className="movies-navigation__link"
+                onClick={props.onClose}
                 to="/">Главная
               </Link>
             </li>
@@ -20,6 +21,7 @@ export default function Navigation() {
               <NavLink
                 className="movies-navigation__link"
                 activeClassName="movies-navigation__link_active"
+                onClick={props.onClose}
                 to="/movies">Фильмы
               </NavLink>
             </li>
@@ -27,6 +29,7 @@ export default function Navigation() {
               <NavLink
                 className="movies-navigation__link"
                 activeClassName="movies-navigation__link_active"
+                onClick={props.onClose}
                 to="/saved-movies">Сохранённые фильмы
               </NavLink>
             </li>
@@ -36,6 +39,7 @@ export default function Navigation() {
           <NavLink
             className="navigation__profile-button"
             activeClassName="navigation__profile-button_active"
+            onClick={props.onClose}
             to="/profile">
             <img className="navigation__profile-icon" src={icon} alt="Аккаунт"/>Аккаунт
           </NavLink>

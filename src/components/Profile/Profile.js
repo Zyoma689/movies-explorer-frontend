@@ -15,18 +15,21 @@ export default function Profile(props) {
           <p className="profile__greeting">Привет, Виталий!</p>
           <div className="profile__inputs">
             <label className="profile__label">
-              <input className="profile__input" type="text" value="Виталий"/>
+              <input className="profile__input" type="text" required/>
               <span className="profile__input-title">Имя</span>
             </label>
             <label className="profile__label">
-              <input className="profile__input profile__input_type_error" type="text" value="pochta@yandexru"/>
+              <input className="profile__input profile__input_type_error" type="text" required/>
               <span className="profile__input-title">E-mail</span>
             </label>
           </div>
-          <p className="profile__message">Что то пошло не так!</p>
-          <div className="profile__container">
-            <button className="profile__button">Редактировать</button>
+          <div className="profile__edit-container profile__edit-container_enabled">
+            <button className="profile__edit-button">Редактировать</button>
             <Link className="profile__link" to="/">Выйти из аккаунта</Link>
+          </div>
+          <div className="profile__save-container">
+            <p className="profile__message profile__message_type_error">При обновлении профиля произошла ошибка.</p>
+            <button className="profile__save-button">Сохранить</button>
           </div>
         </form>
       </section>

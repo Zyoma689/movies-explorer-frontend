@@ -10,7 +10,7 @@ export default function Menu(props) {
           className="menu__close-button"
           onClick={props.onClose}
         />
-        <Navigation/>
+        <Navigation onClose={props.onClose}/>
       </div>
     </div>
   )

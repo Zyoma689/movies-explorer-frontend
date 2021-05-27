@@ -8,6 +8,7 @@
   margin: 0 auto 10px;
   padding: 70px 0 69px;
   border-bottom: 1px solid #424242;
+  width: 100%;
 }
 
 .search-form__form {
@@ -47,8 +48,13 @@
   padding-left: 63px;
 }
 
-.search-form__input:focus {
+.search-form__input:focus{
   outline: none;
+}
+
+.search-form__input-container:focus-within {
+  box-shadow: 0 0 2pt 1pt #4285f4;
+  border-radius: 9px;
 }
 
 .search-form__button {
@@ -145,6 +151,7 @@
 @media screen and (max-width: 1200px) {
   .search-form {
     margin: 0 30px 10px;
+    width: auto;
   }
 }
 
@@ -202,13 +209,14 @@
 
 @media screen and (max-width: 420px) {
   .search-form {
-    max-width: 368px;
+    width: 368px;
     margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 388px) {
   .search-form {
+    width: auto;
     margin: 0 10px 10px;
   }
 }
