@@ -8,7 +8,7 @@ export default function Login() {
     <div className="login">
       <div className="login__container">
         <Link className="login__logo-link" exact to="/">
-          <img className="login__logo" src={logo} alt=""/>
+          <img className="login__logo" src={logo} alt="Лого"/>
         </Link>
         <h1 className="login__title">Рады видеть!</h1>
         <form className="login__form" action="">

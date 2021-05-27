@@ -8,7 +8,7 @@ export default function Register() {
     <div className="register">
       <div className="register__container">
         <Link className="register__logo-link" exact to="/">
-          <img className="register__logo" src={logo} alt=""/>
+          <img className="register__logo" src={logo} alt="Лого"/>
         </Link>
         <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form" action="">

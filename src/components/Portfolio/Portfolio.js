@@ -33,7 +33,7 @@ export default function Portfolio() {
               </li>
             </ul>
           </div>
-          <img className="about__photo" src={avatar} alt=""/>
+          <img className="about__photo" src={avatar} alt="Артем Иванов"/>
         </article>
         <h3 className="portfolio__subtitle">Портфолио</h3>
         <ul className="portfolio__links-list">

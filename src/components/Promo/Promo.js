@@ -11,7 +11,7 @@ export default function Promo() {
           <p className="promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
           <a className="promo__button" href="#about-project">Узнать больше</a>
         </div>
-        <img className="promo__main-illustration" src={illustration} alt=""/>
+        <img className="promo__main-illustration" src={illustration} alt="WEB"/>
       </div>
     </section>
   )

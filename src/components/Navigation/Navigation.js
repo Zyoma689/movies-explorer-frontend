@@ -43,52 +43,10 @@ export default function Navigation(props) {
             to="/profile">
             <img className="navigation__profile-icon" src={icon} alt="Аккаунт"/>Аккаунт
           </NavLink>
-          {/*<ProfileButton/>*/}
-          {/*<Link to="/profile">*/}
-          {/*  <img src={icon} alt="Аккаунт"/>Аккаунт*/}
-          {/*</Link>*/}
         </li>
       </ul>
     </nav>
 
-    // <ul className="movies-navigation">
-    //   <li className="movies-navigation__element">
-    //     <Link
-    //       className="movies-navigation__link"
-    //       to="/movies">Фильмы
-    //     </Link>
-    //   </li>
-    //   <li className="movies-navigation__element">
-    //     <Link
-    //       className="movies-navigation__link"
-    //       to="/saved-movies">Сохранённые фильмы
-    //     </Link>
-    //   </li>
-    // </ul>
-    // <nav className="navigation">
-    //   <ul className="navigation__list">
-    //     <li className="navigation__element">
-    //
-    //     </li>
-    //     <li className="navigation__element">
-    //       <Link to="/profile">
-    //         <img src={icon} alt="Аккаунт"/>Аккаунт
-    //       </Link>
-    //     </li>
-    //   </ul>
-    // </nav>
-    //
-    // <nav className="navigation">
-    //   <ul className="navigation__list">
-    //     <li className="navigation__element">
-    //
-    //     </li>
-    //     <li className="navigation__element">
-    //       <Link to="/profile">
-    //         <img src={icon} alt="Аккаунт"/>Аккаунт
-    //       </Link>
-    //     </li>
-    //   </ul>
-    // </nav>
+
   )
 };
