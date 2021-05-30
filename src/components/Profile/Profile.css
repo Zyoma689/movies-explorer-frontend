@@ -1,12 +1,16 @@
 .profile {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 74px);
+  flex-direction: column;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  min-height: 100vh;
+  /*width: 100%;*/
+  /*height: calc(100vh - 74px);*/
 }
 
+
 .profile__form {
-  margin: 74px 0 70px;
+  margin: 74px auto 70px;
   display: flex;
   flex-direction: column;
   align-items: center;

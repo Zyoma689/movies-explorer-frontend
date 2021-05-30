@@ -4,13 +4,13 @@ import './Profile.css';
 import Header from "../Header/Header";
 import Menu from "../Menu/Menu";
 
-export default function Profile(props) {
+export default function Profile({ isLoggedIn, handleMenuButtonClick, isOpen, onClose }) {
   return (
-    <>
-      <Header
-        onOpenMenu={props.onOpenMenu}
-      />
-      <section className="profile">
+      <div className="profile">
+        <Header
+          isLoggedIn={isLoggedIn}
+          onOpenMenu={handleMenuButtonClick}
+        />
         <form className="profile__form">
           <p className="profile__greeting">Привет, Виталий!</p>
           <div className="profile__inputs">
@@ -32,11 +32,12 @@ export default function Profile(props) {
             <button className="profile__save-button">Сохранить</button>
           </div>
         </form>
-      </section>
-      <Menu
-        isOpen={props.isOpen}
-        onClose={props.onClose}
-      />
-    </>
+
+        <Menu
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      </div>
+
   )
 }

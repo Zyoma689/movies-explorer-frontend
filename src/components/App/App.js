@@ -13,6 +13,7 @@ import Profile from "../Profile/Profile";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as MainApi from "../../utils/MainApi"
 import Preloader from "../Preloader/Preloader";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [ isMenuOpen, setIsMenuOpen ] = React.useState(false);
@@ -40,10 +41,8 @@ function App() {
     setIsLoading(true);
     MainApi.login({ email, password })
       .then((res) => {
-        console.log(res);
         setIsLoggedIn(true);
         history.push('/movies');
-        console.log(isLoggedIn);
       })
       .catch((err) => {
         setErrorMessage(err.message);
@@ -88,32 +87,59 @@ function App() {
         <Switch>
           <Route exact path="/">
             <div className="page__header-container">
-              <Header/>
+              <Header
+                isLoggedIn={isLoggedIn}
+                onOpenMenu={handleMenuButtonClick}
+              />
             </div>
             <Main/>
             <Footer/>
           </Route>
-          <Route path="/movies">
-            <Movies
-              onOpenMenu={handleMenuButtonClick}
-              isOpen={isMenuOpen}
-              onClose={closeMenu}
-            />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies
-              onOpenMenu={handleMenuButtonClick}
-              isOpen={isMenuOpen}
-              onClose={closeMenu}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              onOpenMenu={handleMenuButtonClick}
-              isOpen={isMenuOpen}
-              onClose={closeMenu}
-            />
-          </Route>
+          {/*<Route path="/movies">*/}
+          {/*  <Movies*/}
+          {/*    onOpenMenu={handleMenuButtonClick}*/}
+          {/*    isOpen={isMenuOpen}*/}
+          {/*    onClose={closeMenu}*/}
+          {/*  />*/}
+          {/*</Route>*/}
+          {/*<Route path="/saved-movies">*/}
+          {/*  <SavedMovies*/}
+          {/*    onOpenMenu={handleMenuButtonClick}*/}
+          {/*    isOpen={isMenuOpen}*/}
+          {/*    onClose={closeMenu}*/}
+          {/*  />*/}
+          {/*</Route>*/}
+          <ProtectedRoute
+            path="/movies"
+            component={Movies}
+            isLoggedIn={isLoggedIn}
+            onOpenMenu={handleMenuButtonClick}
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            component={SavedMovies}
+            isLoggedIn={isLoggedIn}
+            onOpenMenu={handleMenuButtonClick}
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            isLoggedIn={isLoggedIn}
+            onOpenMenu={handleMenuButtonClick}
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+          {/*<Route path="/profile">*/}
+          {/*  <Profile*/}
+          {/*    onOpenMenu={handleMenuButtonClick}*/}
+          {/*    isOpen={isMenuOpen}*/}
+          {/*    onClose={closeMenu}*/}
+          {/*  />*/}
+          {/*</Route>*/}
           <Route path="/signup">
             <Register
               isLoading={isLoading}
