@@ -14,7 +14,7 @@ export function useForm() {
   return {values, handleChange, setValues};
 }
 
-//хук управления формой и валидации формы
+//хук управления формой и валидацией формы
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
   const [errors, setErrors] = React.useState({});

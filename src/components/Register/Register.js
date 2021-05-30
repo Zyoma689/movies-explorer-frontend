@@ -16,7 +16,6 @@ export default function Register({ onRegister, isLoading, errorMessage }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     onRegister({ name, email, password });
-
   }
 
   return (
@@ -40,7 +39,7 @@ export default function Register({ onRegister, isLoading, errorMessage }) {
                 name="name"
                 minLength="2"
                 maxLength="30"
-                value={values.name}
+                value={values.name || ''}
                 onChange={handleChange}
                 disabled={isLoading}
                 required
@@ -53,7 +52,7 @@ export default function Register({ onRegister, isLoading, errorMessage }) {
                 className={`register__input ${errors.email && 'register__input_type_error'}`}
                 type="email"
                 name="email"
-                value={values.email}
+                value={values.email || ''}
                 onChange={handleChange}
                 disabled={isLoading}
                 required
@@ -67,7 +66,7 @@ export default function Register({ onRegister, isLoading, errorMessage }) {
                 type="password"
                 name="password"
                 minLength="8"
-                value={values.password}
+                value={values.password || ''}
                 onChange={handleChange}
                 disabled={isLoading}
                 required
@@ -77,7 +76,8 @@ export default function Register({ onRegister, isLoading, errorMessage }) {
           </div>
           <div className="register__button-container">
             <p
-              className={`register__message ${errorMessage && 'register__message_type_error'}`}>{errorMessage}</p>
+              className={`register__message ${errorMessage && 'register__message_type_error'}`}>{errorMessage}
+            </p>
             <button
               className={`register__button ${!isValid && 'register__button_disabled'}`}
               type="submit"

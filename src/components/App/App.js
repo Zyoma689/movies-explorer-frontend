@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from "../Header/Header";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -20,12 +20,13 @@ function App() {
   const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
   const [ isLoading, setIsLoading ] = React.useState(false);
   const [ errorMessage, setErrorMessage ] = React.useState('');
+  const history = useHistory();
 
   function handleRegister({ email, password, name }) {
     setIsLoading(true);
     MainApi.register({ email, password, name })
       .then((res) => {
-        console.log(res);
+        handleLogin({ email, password });
       })
       .catch((err) => {
         setErrorMessage(err.message);
@@ -36,14 +37,19 @@ function App() {
   }
 
   function handleLogin({ email, password }) {
+    setIsLoading(true);
     MainApi.login({ email, password })
       .then((res) => {
         console.log(res);
         setIsLoggedIn(true);
+        history.push('/movies');
         console.log(isLoggedIn);
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMessage(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -116,7 +122,11 @@ function App() {
             />
           </Route>
           <Route path="/signin">
-            <Login/>
+            <Login
+              isLoading={isLoading}
+              onLogin={handleLogin}
+              errorMessage={errorMessage}
+            />
           </Route>
           <Route path="*">
             <PageNotFound/>
