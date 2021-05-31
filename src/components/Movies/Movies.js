@@ -6,12 +6,12 @@ import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({ isLoggedIn, handleMenuButtonClick, isOpen, onClose }) {
+export default function Movies({ isLoggedIn, onOpenMenu }) {
   return (
     <div className="movies">
       <Header
         isLoggedIn={isLoggedIn}
-        onOpenMenu={handleMenuButtonClick}
+        onOpenMenu={onOpenMenu}
       />
 
       <SearchForm/>
@@ -21,11 +21,6 @@ export default function Movies({ isLoggedIn, handleMenuButtonClick, isOpen, onCl
       <div className="movies__more movies__more_enable">
         <button className="movies__more-button">Ещё</button>
       </div>
-
-      <Menu
-        isOpen={isOpen}
-        onClose={onClose}
-      />
 
       <Footer/>
     </div>

@@ -1,4 +1,5 @@
-const BASE_URL = 'https://api.movies.ivart.nomoredomains.club';
+// const BASE_URL = 'https://api.movies.ivart.nomoredomains.club';
+const BASE_URL = 'http://localhost:3000';
 
 const getResponse = (res) => {
   if (res.ok) {
@@ -38,6 +39,29 @@ export const login = ({ email, password }) => {
 export const logout = () => {
   return fetch(`${BASE_URL}/signout`, {
     method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: 'include',
+  })
+    .then(getResponse)
+};
+
+export const updateUser = ({ name, email }) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name, email }),
+    credentials: 'include',
+  })
+    .then(getResponse)
+};
+
+export const getUser = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
     headers: {
       "Content-Type": "application/json"
     },
