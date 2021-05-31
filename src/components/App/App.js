@@ -180,6 +180,7 @@ function App() {
             onClose={closeMenu}
             onUpdate={handleUpdateUser}
             errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
             successMessage={successMessage}
             setSuccessMessage={setSuccessMessage}
           />
