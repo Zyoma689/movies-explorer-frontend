@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import './Profile.css';
 import Header from "../Header/Header";
-import Menu from "../Menu/Menu";
 import {useFormWithValidation} from "../../utils/ReactValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -19,7 +17,7 @@ export default function Profile({
   }) {
   const formWithValidation = useFormWithValidation();
   const { name, email } = formWithValidation.values;
-  const { values, setValues, handleChange, errors, isValid, resetForm } = formWithValidation;
+  const { values, setValues, handleChange, errors, isValid } = formWithValidation;
   const [ isEdited, setIsEdited ] = React.useState(false);
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -50,7 +48,7 @@ export default function Profile({
     setIsEdited(false);
   }
 
-  function handleEditClick(evt) {
+  function handleEditClick() {
     setIsEdited(true);
     setSuccessMessage(false);
   }

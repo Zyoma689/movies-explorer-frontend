@@ -11,10 +11,19 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import * as MainApi from "../../utils/MainApi"
+import * as mainApi from "../../utils/MainApi";
+import * as moviesApi from "../../utils/MoviesApi";
 import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Menu from "../Menu/Menu";
+import {
+  BEATFILM_URL,
+  UNKNOWN_STRING,
+  UNKNOWN_NUMBER,
+  UNKNOWN_IMAGE_URL,
+  UNKNOWN_TRAILER_URL,
+  UNAUTHORIZED,
+} from '../../utils/constants';
 
 function App() {
   const [ isMenuOpen, setIsMenuOpen ] = React.useState(false);
@@ -23,15 +32,18 @@ function App() {
   const [ isLoading, setIsLoading ] = React.useState(false);
   const [ errorMessage, setErrorMessage ] = React.useState('');
   const [ successMessage, setSuccessMessage ] = React.useState(false);
+
+  const [ allMovies, setAllMovies ] = React.useState([]);
   const history = useHistory();
 
   React.useEffect(() => {
     handleGetUser();
+    handleGetAllMovies();
   }, []);
 
   function handleRegister({ email, password, name }) {
     setIsLoading(true);
-    MainApi.register({ email, password, name })
+    mainApi.register({ email, password, name })
       .then((res) => {
         handleLogin({ email, password });
       })
@@ -45,7 +57,7 @@ function App() {
 
   function handleLogin({ email, password }) {
     setIsLoading(true);
-    MainApi.login({ email, password })
+    mainApi.login({ email, password })
       .then((res) => {
         setIsLoggedIn(true);
         history.push('/movies');
@@ -61,13 +73,13 @@ function App() {
   
   function handleLogout() {
     setIsLoading(true);
-    MainApi.logout()
+    mainApi.logout()
       .then((res) => {
         setIsLoggedIn(false);
         history.push('/');
       })
       .catch((err) => {
-        handleUnauthorized(err);
+        handleErrors(err);
         setErrorMessage(err.message);
       })
       .finally(() => {
@@ -77,14 +89,14 @@ function App() {
 
   function handleUpdateUser({ name, email }) {
     setIsLoading(true);
-    MainApi.updateUser({ name, email })
+    mainApi.updateUser({ name, email })
       .then((res) => {
         setCurrentUser({ name, email });
         setSuccessMessage(true);
       })
       .catch((err) => {
         setErrorMessage(err.message);
-        handleUnauthorized(err);
+        handleErrors(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -92,21 +104,48 @@ function App() {
   }
 
   function handleGetUser() {
-    MainApi.getUser()
+    mainApi.getUser()
       .then((res) => {
         const {name, email} = res;
         setCurrentUser({ name, email });
         setIsLoggedIn(true);
-        console.log(currentUser.name)
       })
       .catch((err) => {
-        handleUnauthorized(err);
-        console.log(err.message);
+        handleErrors(err);
       })
   }
 
-  function handleUnauthorized(err) {
-    if (err.message === 'Необходима авторизация') {
+  function handleGetAllMovies() {
+    moviesApi.getAllMovies()
+      .then((data) => {
+        const movies = data.map((item) => {
+          const imageUrl = item.image && item.image.url;
+          const thumbnailUrl = item.image && item.image.formats.thumbnail.url;
+
+          return {
+            country : item.country || UNKNOWN_STRING,
+            director : item.director || UNKNOWN_STRING,
+            duration : item.duration || UNKNOWN_NUMBER,
+            year : item.year || UNKNOWN_STRING,
+            description : item.description || UNKNOWN_STRING,
+            image: imageUrl ? BEATFILM_URL + imageUrl : UNKNOWN_IMAGE_URL,
+            trailer: item.trailerLink ? item.trailerLink : UNKNOWN_TRAILER_URL,
+            thumbnail: thumbnailUrl ? BEATFILM_URL + thumbnailUrl : UNKNOWN_IMAGE_URL,
+            movieId: item.id || UNKNOWN_NUMBER,
+            nameRU : item.nameRU || UNKNOWN_STRING,
+            nameEN : item.nameEN || UNKNOWN_STRING,
+          }
+        });
+        setAllMovies(movies);
+        localStorage.setItem('allMovies', JSON.stringify(movies));
+      })
+      .catch((err) => {
+        setErrorMessage(err);
+      })
+  }
+
+  function handleErrors(err) {
+    if (err.status === UNAUTHORIZED) {
       setIsLoggedIn(false);
     }
   }

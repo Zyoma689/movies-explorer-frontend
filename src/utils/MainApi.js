@@ -1,16 +1,5 @@
-// const BASE_URL = 'https://api.movies.ivart.nomoredomains.club';
-const BASE_URL = 'http://localhost:3000';
-
-const getResponse = (res) => {
-  if (res.ok) {
-    return(res.json());
-  } else {
-    return res.json()
-      .then((err) => {
-        throw new Error(err.message);
-      })
-  }
-};
+import { BASE_URL } from "./constants";
+import { getResponse } from "./getResponse";
 
 export const register = ({ email, password, name }) => {
   return fetch(`${BASE_URL}/signup`, {
