@@ -7,18 +7,16 @@ export default function MoviesCardList(props) {
     <section className="cards">
       <p className="cards__empty">Список пуст</p>
       <ul className="cards__list">
-        <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>
-        <MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>
-        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={false} isSavedMoviesList={props.isSavedMoviesList}/>*/}
-        {/*<MoviesCard isSaved={true} isSavedMoviesList={props.isSavedMoviesList}/>*/}
+        {
+          props.moviesList.map((movie) => (
+            <MoviesCard
+              key={movie.movieId}
+              isSaved={false}
+              isSavedMoviesList={props.isSavedMoviesList}
+              movie={movie}
+            />
+          ))
+        }
       </ul>
     </section>
   )

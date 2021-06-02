@@ -58,3 +58,37 @@ export const getUser = () => {
   })
     .then(getResponse)
 };
+
+export const getSavedMovies = () => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: 'include',
+  })
+    .then(getResponse)
+};
+
+export const saveMovie = (movie) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(movie),
+    credentials: 'include',
+  })
+    .then(getResponse)
+};
+
+export const removeMovie = (id) => {
+  return fetch(`${BASE_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: 'include',
+  })
+    .then(getResponse)
+};

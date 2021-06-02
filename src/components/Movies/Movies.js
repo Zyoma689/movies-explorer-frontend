@@ -6,7 +6,7 @@ import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({ isLoggedIn, onOpenMenu }) {
+export default function Movies({ isLoggedIn, onOpenMenu, moviesList }) {
   return (
     <div className="movies">
       <Header
@@ -16,7 +16,10 @@ export default function Movies({ isLoggedIn, onOpenMenu }) {
 
       <SearchForm/>
 
-      <MoviesCardList isSavedMoviesList={false}/>
+      <MoviesCardList
+        isSavedMoviesList={false}
+        moviesList={moviesList}
+      />
 
       <div className="movies__more movies__more_enable">
         <button className="movies__more-button">Ещё</button>

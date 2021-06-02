@@ -17,7 +17,7 @@ import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Menu from "../Menu/Menu";
 import {
-  BEATFILM_URL,
+  BEATFILM_SOURCE_URL,
   UNKNOWN_STRING,
   UNKNOWN_NUMBER,
   UNKNOWN_IMAGE_URL,
@@ -31,15 +31,44 @@ function App() {
   const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
   const [ isLoading, setIsLoading ] = React.useState(false);
   const [ errorMessage, setErrorMessage ] = React.useState('');
+  const [ globalErrorMessage, setGlobalErrorMessage ] = React.useState('');
   const [ successMessage, setSuccessMessage ] = React.useState(false);
 
   const [ allMovies, setAllMovies ] = React.useState([]);
+  const [ savedMovies, setSavedMovies ] = React.useState([]);
   const history = useHistory();
 
   React.useEffect(() => {
     handleGetUser();
-    handleGetAllMovies();
+    checkLocalStorage();
   }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('localSavedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
+
+  function checkLocalStorage() {
+    checkLocalMovies();
+    checkLocalSavedMovies();
+  }
+  
+  function checkLocalMovies() {
+    const localAllMovies = localStorage.getItem('localAllMovies');
+    if (localAllMovies) {
+      setAllMovies(JSON.parse(localAllMovies));
+    } else {
+      handleGetAllMovies();
+    }
+  }
+
+  function checkLocalSavedMovies() {
+    const localSavedMovies = localStorage.getItem('localSavedMovies');
+    if (localSavedMovies) {
+      setSavedMovies(JSON.parse(localSavedMovies));
+    } else {
+      handleGetSavedMovies();
+    }
+  }
 
   function handleRegister({ email, password, name }) {
     setIsLoading(true);
@@ -128,21 +157,54 @@ function App() {
             duration : item.duration || UNKNOWN_NUMBER,
             year : item.year || UNKNOWN_STRING,
             description : item.description || UNKNOWN_STRING,
-            image: imageUrl ? BEATFILM_URL + imageUrl : UNKNOWN_IMAGE_URL,
+            image: imageUrl ? BEATFILM_SOURCE_URL + imageUrl : UNKNOWN_IMAGE_URL,
             trailer: item.trailerLink ? item.trailerLink : UNKNOWN_TRAILER_URL,
-            thumbnail: thumbnailUrl ? BEATFILM_URL + thumbnailUrl : UNKNOWN_IMAGE_URL,
+            thumbnail: thumbnailUrl ? BEATFILM_SOURCE_URL + thumbnailUrl : UNKNOWN_IMAGE_URL,
             movieId: item.id || UNKNOWN_NUMBER,
             nameRU : item.nameRU || UNKNOWN_STRING,
             nameEN : item.nameEN || UNKNOWN_STRING,
           }
         });
-        setAllMovies(movies);
-        localStorage.setItem('allMovies', JSON.stringify(movies));
+        localStorage.setItem('localAllMovies', JSON.stringify(movies));
       })
       .catch((err) => {
-        setErrorMessage(err);
+        setGlobalErrorMessage(err);
       })
   }
+
+  function handleGetSavedMovies() {
+    mainApi.getSavedMovies()
+      .then((movies) => {
+        localStorage.setItem('localSavedMovies', JSON.stringify(movies));
+        setSavedMovies(movies);
+      })
+      .catch((err) => {
+        setGlobalErrorMessage(err);
+      })
+  }
+
+  function handleSaveMovie(movie) {
+    mainApi.saveMovie(movie)
+      .then((savedMovie) => {
+        setSavedMovies([savedMovie, ...savedMovies])
+      })
+      .catch((err) => {
+        setGlobalErrorMessage(err);
+      })
+  }
+
+  function handleRemoveMovie({ _id }) {
+    mainApi.removeMovie(_id)
+      .then(() => {
+        const newSavedMovies = savedMovies.filter((movie) => movie._id !== _id);
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        setGlobalErrorMessage(err);
+      })
+  }
+
+
 
   function handleErrors(err) {
     if (err.status === UNAUTHORIZED) {
@@ -200,6 +262,7 @@ function App() {
             onOpenMenu={handleMenuButtonClick}
             isOpen={isMenuOpen}
             onClose={closeMenu}
+            moviesList={allMovies}
           />
           <ProtectedRoute
             path="/saved-movies"
