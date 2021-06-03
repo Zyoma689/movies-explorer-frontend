@@ -83,7 +83,7 @@ export const saveMovie = (movie) => {
 };
 
 export const removeMovie = (id) => {
-  return fetch(`${BASE_URL}/${id}`, {
+  return fetch(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
     headers: {
       "Content-Type": "application/json"

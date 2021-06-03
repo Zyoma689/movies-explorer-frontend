@@ -2,11 +2,17 @@ import React from 'react';
 import './Movies.css';
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({ isLoggedIn, onOpenMenu, moviesList }) {
+export default function Movies({
+    isLoggedIn,
+    onOpenMenu,
+    savedMovies,
+    moviesList,
+    handleSaveMovie ,
+    handleRemoveMovie,
+}) {
   return (
     <div className="movies">
       <Header
@@ -18,7 +24,10 @@ export default function Movies({ isLoggedIn, onOpenMenu, moviesList }) {
 
       <MoviesCardList
         isSavedMoviesList={false}
+        savedMovies={savedMovies}
         moviesList={moviesList}
+        handleSaveMovie={handleSaveMovie}
+        handleRemoveMovie={handleRemoveMovie}
       />
 
       <div className="movies__more movies__more_enable">

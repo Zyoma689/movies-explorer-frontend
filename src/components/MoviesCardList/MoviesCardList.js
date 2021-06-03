@@ -2,22 +2,36 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList(props) {
+export default function MoviesCardList({
+    isSavedMoviesList,
+    savedMovies,
+    moviesList,
+    handleSaveMovie ,
+    handleRemoveMovie,
+  }) {
   return (
     <section className="cards">
-      <p className="cards__empty">Список пуст</p>
-      <ul className="cards__list">
-        {
-          props.moviesList.map((movie) => (
-            <MoviesCard
-              key={movie.movieId}
-              isSaved={false}
-              isSavedMoviesList={props.isSavedMoviesList}
-              movie={movie}
-            />
-          ))
-        }
-      </ul>
+      {
+        moviesList.length ? (
+          <ul className="cards__list">
+            {
+              moviesList.map((movie) => (
+                <MoviesCard
+                  key={movie.movieId}
+                  isSavedMoviesList={isSavedMoviesList}
+                  savedMovies={savedMovies}
+                  moviesList={moviesList}
+                  movie={movie}
+                  handleSaveMovie={handleSaveMovie}
+                  handleRemoveMovie={handleRemoveMovie}
+                />
+              ))
+            }
+          </ul>
+        ) : (
+          <p className="cards__empty cards__empty_enabled">Здесь будут фильмы</p>
+        )
+      }
     </section>
   )
 }

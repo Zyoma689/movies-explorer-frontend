@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from "../Header/Header";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -36,10 +36,13 @@ function App() {
 
   const [ allMovies, setAllMovies ] = React.useState([]);
   const [ savedMovies, setSavedMovies ] = React.useState([]);
+
   const history = useHistory();
+  const location = useLocation();
 
   React.useEffect(() => {
     handleGetUser();
+    handleGetSavedMovies();
     checkLocalStorage();
   }, []);
 
@@ -48,25 +51,11 @@ function App() {
   }, [savedMovies]);
 
   function checkLocalStorage() {
-    checkLocalMovies();
-    checkLocalSavedMovies();
-  }
-  
-  function checkLocalMovies() {
     const localAllMovies = localStorage.getItem('localAllMovies');
     if (localAllMovies) {
       setAllMovies(JSON.parse(localAllMovies));
     } else {
       handleGetAllMovies();
-    }
-  }
-
-  function checkLocalSavedMovies() {
-    const localSavedMovies = localStorage.getItem('localSavedMovies');
-    if (localSavedMovies) {
-      setSavedMovies(JSON.parse(localSavedMovies));
-    } else {
-      handleGetSavedMovies();
     }
   }
 
@@ -89,7 +78,7 @@ function App() {
     mainApi.login({ email, password })
       .then((res) => {
         setIsLoggedIn(true);
-        history.push('/movies');
+        // history.push('/movies');
         handleGetUser();
       })
       .catch((err) => {
@@ -138,6 +127,7 @@ function App() {
         const {name, email} = res;
         setCurrentUser({ name, email });
         setIsLoggedIn(true);
+        (location.pathname === '/signup' || location.pathname === '/signin') ? history.push('/movies') : history.push(location.pathname);
       })
       .catch((err) => {
         handleErrors(err);
@@ -175,7 +165,6 @@ function App() {
   function handleGetSavedMovies() {
     mainApi.getSavedMovies()
       .then((movies) => {
-        localStorage.setItem('localSavedMovies', JSON.stringify(movies));
         setSavedMovies(movies);
       })
       .catch((err) => {
@@ -184,16 +173,16 @@ function App() {
   }
 
   function handleSaveMovie(movie) {
-    mainApi.saveMovie(movie)
+      mainApi.saveMovie(movie)
       .then((savedMovie) => {
-        setSavedMovies([savedMovie, ...savedMovies])
+        setSavedMovies([savedMovie, ...savedMovies]);
       })
       .catch((err) => {
         setGlobalErrorMessage(err);
       })
   }
 
-  function handleRemoveMovie({ _id }) {
+  function handleRemoveMovie(_id) {
     mainApi.removeMovie(_id)
       .then(() => {
         const newSavedMovies = savedMovies.filter((movie) => movie._id !== _id);
@@ -262,7 +251,10 @@ function App() {
             onOpenMenu={handleMenuButtonClick}
             isOpen={isMenuOpen}
             onClose={closeMenu}
+            savedMovies={savedMovies}
             moviesList={allMovies}
+            handleSaveMovie={handleSaveMovie}
+            handleRemoveMovie={handleRemoveMovie}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -271,6 +263,10 @@ function App() {
             onOpenMenu={handleMenuButtonClick}
             isOpen={isMenuOpen}
             onClose={closeMenu}
+            savedMovies={savedMovies}
+            moviesList={savedMovies}
+            handleGetSavedMovies={handleGetSavedMovies}
+            handleRemoveMovie={handleRemoveMovie}
           />
           <ProtectedRoute
             path="/profile"
