@@ -101,7 +101,7 @@ export default function Profile({
             <button className="profile__quit-button" type="button" onClick={onLogout}>Выйти из аккаунта</button>
           </div>
           <div className={`profile__save-container ${isEdited && 'profile__save-container_enabled'}`}>
-            <p className={`profile__message ${errorMessage &&'profile__message_type_error'}`}>{errorMessage}</p>
+            <p className={`profile__message ${errorMessage && 'profile__message_type_error'}`}>{errorMessage}</p>
             <button
               className={`profile__save-button ${(!isValid || !isChanged) && 'profile__save-button_disabled'}`}
               type="submit"

@@ -5,14 +5,38 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({
+export default function Movies(
+  {
     isLoggedIn,
     onOpenMenu,
+    allMovies,
     savedMovies,
-    moviesList,
-    handleSaveMovie ,
+    handleSaveMovie,
     handleRemoveMovie,
-}) {
+    onSearch,
+    onFilter,
+    isLoading,
+  }) {
+
+  const [ searchInput, setSearchInput ] = React.useState([]);
+  const [ checkboxActivated, setCheckboxActivated ] = React.useState(false);
+  const [ foundMovies, setFoundMovies ] = React.useState([]);
+  const [ filteredMovies, setFilteredMovies ] = React.useState([]);
+
+  React.useEffect(() => {
+    searchHandler();
+    filterHandler();
+  }, [checkboxActivated, searchInput]);
+
+  function searchHandler() {
+     setFoundMovies(onSearch(allMovies, searchInput));
+  }
+
+  function filterHandler() {
+    setFilteredMovies(onFilter(foundMovies));
+  }
+
+
   return (
     <div className="movies">
       <Header
@@ -20,12 +44,16 @@ export default function Movies({
         onOpenMenu={onOpenMenu}
       />
 
-      <SearchForm/>
+      <SearchForm
+        isLoading={isLoading}
+        setSearchInput={setSearchInput}
+        setCheckboxActivated={setCheckboxActivated}
+      />
 
       <MoviesCardList
         isSavedMoviesList={false}
         savedMovies={savedMovies}
-        moviesList={moviesList}
+        moviesList={checkboxActivated ? filteredMovies : foundMovies}
         handleSaveMovie={handleSaveMovie}
         handleRemoveMovie={handleRemoveMovie}
       />

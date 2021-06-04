@@ -5,7 +5,7 @@ import { durationConverter } from '../../utils/durationConverter';
 export default function MoviesCard({
     isSavedMoviesList,
     savedMovies, movie,
-    handleSaveMovie ,
+    handleSaveMovie,
     handleRemoveMovie,
   }) {
   const { image, nameRU, duration, trailer } = movie;
