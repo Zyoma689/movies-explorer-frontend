@@ -13,7 +13,6 @@ import Profile from "../Profile/Profile";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as mainApi from "../../utils/MainApi";
 import * as moviesApi from "../../utils/MoviesApi";
-import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Menu from "../Menu/Menu";
 import {
@@ -32,14 +31,10 @@ function App() {
   const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
   const [ isLoading, setIsLoading ] = React.useState(false);
   const [ errorMessage, setErrorMessage ] = React.useState('');
-  const [ globalErrorMessage, setGlobalErrorMessage ] = React.useState('');
+  const [ globalError, setGlobalError ] = React.useState(false);
   const [ successMessage, setSuccessMessage ] = React.useState(false);
-
   const [ allMovies, setAllMovies ] = React.useState([]);
   const [ savedMovies, setSavedMovies ] = React.useState([]);
-
-  // const [ foundMovies, setFoundMovies ] = React.useState([]);
-  // const [ filteredMovies, setFilteredMovies ] = React.useState([]);
 
   const history = useHistory();
   const location = useLocation();
@@ -48,14 +43,7 @@ function App() {
     handleGetUser();
     handleGetSavedMovies();
     checkLocalStorage();
-    // const result = filterByDuration(allMovies);
-    // const result = handleSearch(allMovies, 'un');
-    // console.log(result);
   }, []);
-
-  React.useEffect(() => {
-    setIntoLocalStorage('localSavedMovies', savedMovies);
-  }, [savedMovies]);
 
   function checkLocalStorage() {
     const localAllMovies = localStorage.getItem('localAllMovies');
@@ -85,7 +73,6 @@ function App() {
     mainApi.login({ email, password })
       .then((res) => {
         setIsLoggedIn(true);
-        // history.push('/movies');
         handleGetUser();
       })
       .catch((err) => {
@@ -164,18 +151,22 @@ function App() {
         });
         localStorage.setItem('localAllMovies', JSON.stringify(movies));
       })
-      .catch((err) => {
-        setGlobalErrorMessage(err);
+      .catch(() => {
+        setGlobalError(true);
       })
   }
 
   function handleGetSavedMovies() {
+    setIsLoading(true);
     mainApi.getSavedMovies()
       .then((movies) => {
         setSavedMovies(movies.slice().reverse());
       })
-      .catch((err) => {
-        setGlobalErrorMessage(err);
+      .catch(() => {
+        setGlobalError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -185,7 +176,7 @@ function App() {
         setSavedMovies([savedMovie, ...savedMovies]);
       })
       .catch((err) => {
-        setGlobalErrorMessage(err);
+        setGlobalError(err);
       })
   }
 
@@ -196,7 +187,7 @@ function App() {
         setSavedMovies(newSavedMovies);
       })
       .catch((err) => {
-        setGlobalErrorMessage(err);
+        setGlobalError(err);
       })
   }
 
@@ -206,22 +197,18 @@ function App() {
     });
   }
 
-  // function handleSearch(moviesLIst, searchInput) {
-  //   const searchResult = moviesLIst.filter((movie) => {
-  //     return movie.nameRU.toLocaleLowerCase().includes(searchInput);
-  //   });
-  //   setFoundMovies(searchResult);
-  // }
-
   function filterByDuration(moviesLIst) {
     return moviesLIst.filter((movie) => {
       return movie.duration <= SHORT_FILM_DURATION;
     });
-    // setFilteredMovies(filterResult);
   }
   
   function setIntoLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  function getFromLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
   }
 
 
@@ -287,6 +274,9 @@ function App() {
             onSearch={handleSearch}
             onFilter={filterByDuration}
             isLoading={isLoading}
+            setIntoLocalStorage={setIntoLocalStorage}
+            getFromLocalStorage={getFromLocalStorage}
+            globalError={globalError}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -299,15 +289,15 @@ function App() {
             onSearch={handleSearch}
             onFilter={filterByDuration}
             isLoading={isLoading}
+            globalError={globalError}
           />
           <ProtectedRoute
             path="/profile"
             component={Profile}
             isLoggedIn={isLoggedIn}
             onLogout={handleLogout}
+            isLoading={isLoading}
             onOpenMenu={handleMenuButtonClick}
-            isOpen={isMenuOpen}
-            onClose={closeMenu}
             onUpdate={handleUpdateUser}
             errorMessage={errorMessage}
             setErrorMessage={setErrorMessage}
@@ -332,9 +322,6 @@ function App() {
             <PageNotFound/>
           </Route>
         </Switch>
-        <div className={`page__preloader ${isLoading && 'page__preloader_enabled'}`}>
-          <Preloader/>
-        </div>
         <Menu
           isOpen={isMenuOpen}
           onClose={closeMenu}

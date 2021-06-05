@@ -14,7 +14,8 @@ export default function SavedMovies(
     handleRemoveMovie,
     onSearch,
     onFilter,
-    isLoading
+    isLoading,
+    globalError,
   }) {
 
   React.useEffect(() => {
@@ -57,6 +58,7 @@ export default function SavedMovies(
         savedMovies={savedMovies}
         handleRemoveMovie={handleRemoveMovie}
         moviesList={checkboxActivated ? filteredMovies : foundMovies}
+        globalError={globalError}
       />
 
       <Footer/>
