@@ -159,6 +159,7 @@ function App() {
           }
         });
         localStorage.setItem('localAllMovies', JSON.stringify(movies));
+        setAllMovies(movies);
       })
       .catch(() => {
         setGlobalError(true);
