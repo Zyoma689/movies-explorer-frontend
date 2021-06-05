@@ -36,31 +36,6 @@ export default function Header({ isLoggedIn, onOpenMenu }) {
             </ul>
           )
       }
-      {/*<Switch>*/}
-      {/*  <Route exact path="/">*/}
-      {/*    <ul className="header__auth-list">*/}
-      {/*      <li className="header__auth-element">*/}
-      {/*        <Link className="header__sing-up-link" to="/signup">*/}
-      {/*          Регистрация*/}
-      {/*        </Link>*/}
-      {/*      </li>*/}
-      {/*      <li className="header__auth-element">*/}
-      {/*        <Link className="header__sign-in-button" to="/signin">*/}
-      {/*          Войти*/}
-      {/*        </Link>*/}
-      {/*      </li>*/}
-      {/*    </ul>*/}
-      {/*  </Route>*/}
-      {/*  <Route path={["/movies", "/saved-movies", "/profile"]}>*/}
-      {/*    <div className="header__navigation">*/}
-      {/*      <Navigation/>*/}
-      {/*    </div>*/}
-      {/*    <button*/}
-      {/*      className="header__hamburger-button"*/}
-      {/*      onClick={onOpenMenu}*/}
-      {/*    />*/}
-      {/*  </Route>*/}
-      {/*</Switch>*/}
     </header>
   )
 };

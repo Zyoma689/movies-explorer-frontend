@@ -57,7 +57,7 @@ function App() {
   function handleRegister({ email, password, name }) {
     setIsLoading(true);
     mainApi.register({ email, password, name })
-      .then((res) => {
+      .then(() => {
         handleLogin({ email, password });
       })
       .catch((err) => {
@@ -71,7 +71,7 @@ function App() {
   function handleLogin({ email, password }) {
     setIsLoading(true);
     mainApi.login({ email, password })
-      .then((res) => {
+      .then(() => {
         setIsLoggedIn(true);
         handleGetUser();
       })
@@ -86,9 +86,10 @@ function App() {
   function handleLogout() {
     setIsLoading(true);
     mainApi.logout()
-      .then((res) => {
+      .then(() => {
         setIsLoggedIn(false);
         history.push('/');
+        clearData();
       })
       .catch((err) => {
         handleErrors(err);
@@ -98,11 +99,19 @@ function App() {
         setIsLoading(false);
       })
   }
+  
+  function clearData() {
+    localStorage.removeItem('lastSearch');
+    setGlobalError(false);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+  }
 
   function handleUpdateUser({ name, email }) {
     setIsLoading(true);
     mainApi.updateUser({ name, email })
-      .then((res) => {
+      .then(() => {
         setCurrentUser({ name, email });
         setSuccessMessage(true);
       })
@@ -118,7 +127,7 @@ function App() {
   function handleGetUser() {
     mainApi.getUser()
       .then((res) => {
-        const {name, email} = res;
+        const { name, email } = res;
         setCurrentUser({ name, email });
         setIsLoggedIn(true);
         (location.pathname === '/signup' || location.pathname === '/signin') ? history.push('/movies') : history.push(location.pathname);
@@ -162,8 +171,9 @@ function App() {
       .then((movies) => {
         setSavedMovies(movies.slice().reverse());
       })
-      .catch(() => {
+      .catch((err) => {
         setGlobalError(true);
+        handleErrors(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -177,6 +187,7 @@ function App() {
       })
       .catch((err) => {
         setGlobalError(err);
+        handleErrors(err);
       })
   }
 
@@ -188,6 +199,7 @@ function App() {
       })
       .catch((err) => {
         setGlobalError(err);
+        handleErrors(err);
       })
   }
 
@@ -211,11 +223,10 @@ function App() {
     return JSON.parse(localStorage.getItem(key));
   }
 
-
-
   function handleErrors(err) {
     if (err.status === UNAUTHORIZED) {
       setIsLoggedIn(false);
+      clearData();
     }
   }
 
