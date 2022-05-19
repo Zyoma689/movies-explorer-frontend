@@ -26,9 +26,11 @@
 </h4>
 
 <h3 align="center">
-  <a href=".." title="Link">Demo</a> 
+  <a href="#" title="Link">Demo</a> 
   •
-  <a href="https://iv-a.github.io/react-burger/">GitHubPages</a>
+  <a href="#">GitHubPages</a>
+  •
+  <a href="https://github.com/iv-a/movies-explorer-api">Backend</a>
 </h3>
 
 <h1 id="about">О проекте</h1>
