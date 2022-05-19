@@ -26,9 +26,9 @@
 </h4>
 
 <h3 align="center">
-  <a href="#" title="Link">Demo</a> 
+  <a href="#" title="Link">Demo<ruby>&nbsp;<rt>Скоро</rt></ruby></a> 
   •
-  <a href="#">GitHubPages</a>
+  <a href="#">GitHubPages<ruby>&nbsp;<rt>Скоро</rt></ruby></a>
   •
   <a href="https://github.com/iv-a/movies-explorer-api">Backend</a>
 </h3>
